@@ -1,0 +1,40 @@
+DSU 
+
+MST:
+
+In a weighted undirected graph, an MST is a subset of edges that:
+        1 .	Connects all vertices (forms a spanning tree).
+	2.	Has no cycles (since it’s a tree).
+	3.	Has the minimum possible total edge weight among all such spanning trees.
+Algorithms to find this MST	 : 
+        1.     Prim’s algorithm  O(m logn)
+        2.     Kruskal’s algorithm O(m logm)
+
+
+Prim’s Algorithm - > USED FOR CONSTRUCTING MST
+Required thing :
+* Priority queue-> {weight , node , parent}
+* Visited array 
+* And a mst edges array to store the tree in form of edges 
+   Start with any given node ( 0 , 0 ,-1)
+
+Snippet created 
+
+DISJOINT SET 
+Two options :
+1. Find the parent
+2. Union: can be done with two methods , 1 is rank and other is size.  while build a graph , from first to last edge someone can ask a question in between whether two nodes are connected or so ….
+For union by rank-> U(u,v) 1. Find the  ultimate parent of u and v , pu , pv
+2. Find rank of pu and pv
+3. Rank is basically the depth of a set
+4. Connect smaller rank to larger rank
+For union by size->
+  Same thing happens but the size is changed after merging 
+  Size is the number of nodes present in a set  and we merger the smaller set with larger set 
+
+
+NOW 
+Kruskal’s algorithm-> used for constructing MST 
+Sort the edges by weight like (wt, u ,v ) 
+Then keep on union them If they don’t have same parent 
+To find no. of provinces or numbers of connected components , find parent[i] = i and ans++;
