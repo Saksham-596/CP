@@ -278,11 +278,53 @@ vector<ll>  bellman_ford(ll n , ll  src , vector<vector<ll>> &  edges) { // edge
 
 
 
+//----------------build-lps------------------------//
 
+auto build_lps = [&](string &p)->vector<ll> {
+        ll n = p.size();
+        vector<ll> lps(n);
+        ll len = 0;
+        for (ll i  = 1; i < n;) {
+            if(p[i]==p[len]) {
+                len++;
+                lps[i] = len;
+                i++;
+            }else {
+                if (len != 0) {
+                    len = lps[len-1] ;
+                } else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        return lps;
+    };
 
+//--------kmp-----------------------------------------//
 
-
-
+auto kmp = [&](string & text , string & pat) {
+        vector<ll> lps = build_lps(pat);
+        vector<ll> occ;
+        ll i = 0,j = 0;
+        while(i<text.size()) {
+            if(text[i]==pat[j]) {
+                i++;
+                j++;
+            }
+            if(j==pat.size()) {
+                occ.push_back(i-j);
+                j = lps[j-1];
+            }
+            else if(i < text.size () &&  text[i]!=pat[j]) {
+                if(j!=0)
+                    j = lps[j-1];
+                else
+                    i++;
+            }
+        }
+        return occ;
+    };
 
 
 
